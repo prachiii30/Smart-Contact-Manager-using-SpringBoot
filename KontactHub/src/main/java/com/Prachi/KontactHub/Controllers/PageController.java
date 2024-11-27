@@ -3,9 +3,15 @@ package com.Prachi.KontactHub.Controllers;
 import com.Prachi.KontactHub.Services.UserService;
 import com.Prachi.KontactHub.entities.User;
 import com.Prachi.KontactHub.forms.UserForm;
+import com.Prachi.KontactHub.helpers.Message;
+import com.Prachi.KontactHub.helpers.MessageType;
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
+import lombok.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -48,7 +54,8 @@ public class PageController {
     }
 
     @RequestMapping("/register")
-    public String register(Model model){
+    public String register(Model model ){
+//        session.removeAttribute("message");
         UserForm userForm=new UserForm();
 //        userForm.setName("Prachi");
         model.addAttribute("userForm",userForm);
@@ -58,11 +65,15 @@ public class PageController {
     }
 
     @RequestMapping(value = "/do-register", method = RequestMethod.POST)
-    public String processRegister(@ModelAttribute UserForm userForm){
+    public String processRegister(@Valid @ModelAttribute UserForm userForm, BindingResult bingindResult, HttpSession session){
 
         System.out.println(userForm);
         //fetch data
         //validate
+        if(bingindResult.hasErrors())
+            return "register";
+
+
         //save
 
 //        User user= User.builder()
@@ -81,6 +92,10 @@ public class PageController {
         System.out.println("USER SAVED");
 
         //message (optional)
+
+
+       Message message= Message.builder().content("Registration Successful").type(MessageType.green).build();
+        session.setAttribute("message",message);
         //redirect
         return "redirect:/register";
     }
