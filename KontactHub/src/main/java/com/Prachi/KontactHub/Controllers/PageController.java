@@ -1,15 +1,20 @@
 package com.Prachi.KontactHub.Controllers;
 
+import com.Prachi.KontactHub.Services.UserService;
+import com.Prachi.KontactHub.entities.User;
+import com.Prachi.KontactHub.forms.UserForm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
 public class PageController {
+
+    @Autowired
+    private UserService userService;
+
     @RequestMapping("/home")
     public String home(Model m){
         m.addAttribute("name"," Prachi ");
@@ -43,21 +48,44 @@ public class PageController {
     }
 
     @RequestMapping("/register")
-    public String register(){
+    public String register(Model model){
+        UserForm userForm=new UserForm();
+//        userForm.setName("Prachi");
+        model.addAttribute("userForm",userForm);
+
 
         return "register";
     }
 
     @RequestMapping(value = "/do-register", method = RequestMethod.POST)
-    public String processRegister(){
+    public String processRegister(@ModelAttribute UserForm userForm){
 
+        System.out.println(userForm);
         //fetch data
         //validate
         //save
+
+//        User user= User.builder()
+//                .name(userForm.getName())
+//                .email(userForm.getEmail())
+//                .password(userForm.getPassword())
+//                .phoneNumber(userForm.getPhoneNumber())
+//                .build();
+        User user=new User();
+        user.setName(userForm.getName());
+        user.setEmail(userForm.getEmail());
+        user.setPassword(userForm.getPassword());
+        user.setPhoneNumber(userForm.getPhoneNumber());
+        user.setProfileImg("https://www.google.com/imgres?q=pinterest%20dp%20image&imgurl=https%3A%2F%2Fi.pinimg.com%2F564x%2F80%2F34%2F3e%2F80343e69d0c5c22e827523668f76ef0b.jpg&imgrefurl=https%3A%2F%2Fin.pinterest.com%2Fpin%2F102-cool-iphone-wallpapers-aesthetic-backgrounds--909375349740454508%2F&docid=Q60-Ekk19wDCiM&tbnid=xXjp17PJ9EtqLM&vet=12ahUKEwjwitOr_fuJAxUe4zgGHVkuIkcQM3oECBoQAA..i&w=564&h=996&hcb=2&ved=2ahUKEwjwitOr_fuJAxUe4zgGHVkuIkcQM3oECBoQAA");
+        User saveduser=userService.saveUser(user);
+        System.out.println("USER SAVED");
+
         //message (optional)
         //redirect
-        return "";
+        return "redirect:/register";
     }
+
+
 
 
 

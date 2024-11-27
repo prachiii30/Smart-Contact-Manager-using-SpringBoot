@@ -33,7 +33,7 @@ public class User {
     private boolean phoneVerified = false;
 
     //self,google,fb,etc
-
+    @Enumerated(value=EnumType.STRING)
     private Providers provider=Providers.SELF;
     private String providerUserId;
 
