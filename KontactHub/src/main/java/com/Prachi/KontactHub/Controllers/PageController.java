@@ -64,6 +64,12 @@ public class PageController {
         return "register";
     }
 
+    @GetMapping("/")
+    public String index(){
+        return "redirect:/home";
+
+    }
+
     @RequestMapping(value = "/do-register", method = RequestMethod.POST)
     public String processRegister(@Valid @ModelAttribute UserForm userForm, BindingResult bingindResult, HttpSession session){
 

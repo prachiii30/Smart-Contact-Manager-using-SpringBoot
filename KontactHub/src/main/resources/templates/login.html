@@ -9,8 +9,70 @@
 <body>
 <div class="pt-20" id="content">
     <!-- Adding `pt-20` for top padding -->
+    <div class="grid grid-cols-12">
+        <div class="col-span-3 " ></div>
+        <div class="col-span-6">
+            <div  class="block  p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
-    <h1>Hello,<span data-th-text="${name}"></span>You are in login page</h1>
+                <div data-th-replace="~{message::messagebox}"></div>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Login Here</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">Kickstart your cloud contact management today!</p>
+
+                <form
+                        method="post"
+                        data-th-action="@{'/authenticate'}"
+                      class="mt-3"
+
+                >
+                    <div class="mb-3">
+                        <label for="email"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            E-mail</label>
+                        <input
+                                name="email"
+                                type="email"
+
+                               id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter e-mail" required />
+
+<!--                        <p-->
+<!--                                data-th-if="${#fields.hasErrors('email' )}"-->
+<!--                                data-th-errors="*{email}"-->
+<!--                                class="text-red-500 pt-2">Email Required</p>-->
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Password</label>
+                        <input
+                                name="password"
+                                type="password"
+                               id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter password" required />
+
+<!--                        <p-->
+<!--                                data-th-if="${#fields.hasErrors('password' )}"-->
+<!--                                data-th-errors="*{password}"-->
+<!--                                class="text-red-500 pt-2">Password Required</p>-->
+                    </div>
+
+
+
+                    <div class="mb-3 flex justify-center space-x-3" >
+                        <button
+                                type="submit"
+                                class="px-3 py-2 rounded bg-gray-800 text-white dark:bg-blue-700 !important">
+                            Login Here
+                        </button>
+
+                    </div>
+
+
+                </form>
+            </div>
+
+        </div>
+        <div class="col-span-3"></div>
+    </div>
 </div>
 
 <script>
