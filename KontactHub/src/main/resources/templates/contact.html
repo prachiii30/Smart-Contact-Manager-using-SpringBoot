@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      th:replace="~{frag:: parent(~{:: #content},~{::title},~{::script})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+</head>
+<body>
+<div class="pt-20" id="content">
+    <!-- Adding `pt-20` for top padding -->
+
+    <h1>Hello,<span data-th-text="${name}"></span>You are in contact page</h1>
+</div>
+
+<script>
+    console.log("in contact");
+</script>
+
+</body>
+</html>
