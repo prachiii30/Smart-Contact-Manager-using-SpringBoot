@@ -47,7 +47,7 @@ public class PageController {
         return "contact";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(value= "/login")
     public String login(){
 
         return "login";
